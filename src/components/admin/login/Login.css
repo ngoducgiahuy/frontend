@@ -1,0 +1,55 @@
+.div-form {
+    width: 30%;
+    margin: auto;
+    background-color: white;
+    color: black;
+    border: 1.5px solid black;
+    height: 80%;
+    position: relative;
+    top:40px;
+    border-radius: 25px;
+}
+
+.div-container {
+    background-color: #4158D0;
+    background-image: linear-gradient(45deg, #4158D0 0%, #57eded 47%, #e8bee9 86%);
+    height: 41rem;
+}
+
+.login-title {
+    text-align: center;
+    margin-top: 2rem;
+    font-family: cursive;
+}
+
+.login-item {
+    width: 20rem;
+    margin: auto;
+    margin-top: 2rem;
+}
+
+.login-form {
+    margin-top: 2rem;
+}
+
+.label-username {
+    font-weight: bold;
+}
+
+.label-password {
+    font-weight: bold;
+}
+
+.input-username {
+    border-radius: 15px;
+}
+
+.btn-login{
+    float: right;
+}
+
+.h6-under{
+    position: relative;
+    bottom: -180px;
+    text-align: center;
+}
