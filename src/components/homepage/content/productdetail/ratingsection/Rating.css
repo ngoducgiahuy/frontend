@@ -1,0 +1,38 @@
+.btn-rating {
+    margin-bottom: 0.5rem!important;
+    margin-left: 1rem!important;
+    height: 2rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+.div-user-inline {
+    display: inline-flex;
+}
+
+.rating-section-margin {
+    margin-left: 2rem;
+}
+
+.star-margin {
+    margin-left: 0.8rem;
+}
+
+.rating-section-margin {
+    margin-left: 1rem;
+}
+
+.individual-rating {
+    margin-top: 0.2rem;
+}
+
+.hr-rating {
+    width: 45rem;
+    margin-left: 3rem;
+}
+
+.rating-date {
+    color:#948f8f;
+    float: right;
+    margin-right: 1rem;
+}
