@@ -1,0 +1,11 @@
+.margin-top {
+    margin-top: 1rem!important;
+}
+.margin-top-product {
+    margin-top: 1rem!important;
+}
+
+.no-margin-lr {
+    margin-left: 0!important;
+    margin-right: 0!important;
+}

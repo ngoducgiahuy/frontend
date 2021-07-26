@@ -1,0 +1,13 @@
+.img-width{
+    width: 100%;
+    height: 18rem;
+}
+
+.margin-top-carousel {
+    margin-top: 1rem;
+}
+
+.no-margin-lr {
+    margin-left: 0;
+    margin-right: 0;
+}

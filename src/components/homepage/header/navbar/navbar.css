@@ -1,0 +1,22 @@
+.flex-reverse {
+    flex-flow: row-reverse;
+    margin-right: 7rem;
+}
+
+
+.link-css {
+    text-decoration: none;
+    color: #646962;
+}
+
+.link-css:hover {
+    color: #000000;
+}
+
+.visible-hidden {
+    visibility: hidden;
+}
+
+.visible-visible {
+    visibility: visible;
+}

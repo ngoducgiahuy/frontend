@@ -1,0 +1,13 @@
+.hr-margin {
+    margin-top: 0.7rem;
+    margin-bottom: 0.15rem;
+}
+
+.float-right {
+    float: right;
+}
+
+.error-message {
+    color: red;
+    font-style: italic;
+}
