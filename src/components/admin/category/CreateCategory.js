@@ -1,9 +1,8 @@
 
-import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
 import './Category.css';
 import { postAuth } from '../../utils/httpHelper';
-import { getJWT } from '../../utils/Authentication';
 
 const CreateCategory = (props) => {
   const {
@@ -15,17 +14,27 @@ const CreateCategory = (props) => {
   const [nameError, setNameError] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
   const [responseError, setResponseError] = useState("");
-  // const [descriptionError, setDescriptionError] = useState("");
 
   var errorFlag = false;
 
   const toggle = () => setModal(!modal);
 
+  const toggleCancel = () => {
+    setModal(!modal)
+    setResponseError("");
+    setResponseMessage("");
+    setNameError("");
+  }
+
+  useEffect(() => {
+    setResponseError("");
+  }, [modal]);
+
   function validate(e) {
     errorFlag = false
     var nameErrorTemp = "";
-    var name = e.target.name.value.toString().trim()
-    if (name == "") {
+    var name = e.target.name.value.trim();
+    if (name === "") {
       nameErrorTemp = nameErrorTemp + "Name must not empty!";
       errorFlag = true;
     }
@@ -37,10 +46,9 @@ const CreateCategory = (props) => {
     validate(e);
     if (errorFlag === false) {
       const body = JSON.stringify({
-        name: e.target.name.value,
-        description: e.target.description.value,
+        name: e.target.name.value.trim(),
+        description: e.target.description.value.trim(),
       });
-      console.log(body);
       postAuth("/categories", body).then((response) => {
         if (response.status === 201) {
           setResponseError("");
@@ -48,13 +56,10 @@ const CreateCategory = (props) => {
           window.location.reload();
         }
       }).catch((error) => {
-        console.log(error.response.data.message);
         setResponseError(error.response.data.message);
         setResponseMessage("");
       })
     }
-    
-    console.log({responseMessage});
 
   }
 
@@ -63,15 +68,15 @@ const CreateCategory = (props) => {
       <Button color="success" onClick={toggle}>{buttonLabel}</Button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}>Create new category</ModalHeader>
-        {(responseError!=="") &&
-                <div>
-                    <Alert color="danger">
-                        {responseError}
-                    </Alert>
-                </div>
-            }
+        {(responseError !== "") &&
+          <div>
+            <Alert color="danger">
+              {responseError}
+            </Alert>
+          </div>
+        }
         <ModalBody>
-          <Form onSubmit={(e) => handleSubmit(e)}>
+          <Form onSubmit={(e) => handleSubmit(e)} method="post">
             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
               <Label for="name" className="mr-sm-2">Name</Label>
               <Input className="mt-2" type="text" name="name" id="name" placeholder="name" />
@@ -83,7 +88,7 @@ const CreateCategory = (props) => {
             </FormGroup>
             <FormGroup className="mb-2 mr-sm-2 mb-sm-0 mt-3 float-right">
               <Button color="primary" type="submit">Submit</Button>
-              <Button color="secondary" onClick={toggle}>Cancel</Button>
+              <Button color="secondary" onClick={toggleCancel}>Cancel</Button>
             </FormGroup>
           </Form>
         </ModalBody>

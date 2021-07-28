@@ -1,0 +1,40 @@
+.order-dashboard {
+    padding: 0.7rem;
+    width: 95%;
+    margin-top: 1rem;
+    margin-left: 3rem;
+}
+
+.create-order-btn {
+    float: right;
+    margin-bottom: 1rem;
+}
+
+.order {
+    width: 75%;
+}
+
+.action-column {
+    width: 16rem;
+}
+
+.margin-left {
+    margin-left: 0.7rem;
+}
+
+.allSides {
+    /* border: solid 1px #555; */
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.edit-btn {
+    /* width: 7rem; */
+    display: inline-flex;
+}
+.select-cate {
+    margin-left: 1rem;
+}

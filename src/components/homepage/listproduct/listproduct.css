@@ -18,14 +18,22 @@
 
 .product-div {
     width: 263px;
-    height: 420px!important;
+    height: 470px!important;
 }
 
 
 .product-data {
-    height: 110px;
+    height: 140px;
+    width: 100%;
 }
 
 .product-link {
     text-decoration: none;
+}
+
+.btn-add-cart{
+    width: 50%;
+    height: 4rem;
+    margin: auto;
+    margin-bottom: 1rem;
 }

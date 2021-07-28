@@ -54,11 +54,6 @@ export default class UserRating extends Component {
         }
 
         const submitRating = (e) => {
-            // alert(this.state.currentValue);
-            // alert(this.state.commentValue);
-            // alert(this.state.productId);
-            // alert(this.state.userId);
-
             e.preventDefault();
 
             const body = JSON.stringify({
@@ -74,8 +69,6 @@ export default class UserRating extends Component {
                     window.location.reload();
                 }
             }).catch((error) => console.log(error))
-
-            console.log(body);
         }
 
         const handleMouseOver = newHoverValue => {

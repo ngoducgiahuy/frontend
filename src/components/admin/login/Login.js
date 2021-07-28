@@ -22,8 +22,6 @@ export default class Login extends Component {
                             <Button className="btn-login" color="primary" type="submit">Login</Button>
                         </FormGroup>
                     </Form>
-
-                    {/* <h6 className="h6-under">Login page for Huyshop's staff</h6> */}
                 </div>
             </div>
         )

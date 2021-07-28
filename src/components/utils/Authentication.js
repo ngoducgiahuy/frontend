@@ -2,7 +2,9 @@ import Cookies from 'js-cookie';
 
 export function compareRole(stringRole) {
     var roles = Cookies.get("roles");
+    console.log(roles);
     console.log(roles.includes(stringRole));
+    return roles.includes(stringRole);
 }
 
 export function isLoggedIn() {

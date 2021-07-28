@@ -10,7 +10,6 @@ class ProductByCate extends Component {
     }
 
     componentDidMount() {
-        // const cateID = this.props.match.params.cateId;
         this.getProductList();
     }
 

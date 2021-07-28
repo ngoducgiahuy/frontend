@@ -5,7 +5,7 @@ import { Redirect } from 'react-router';
 
 export default class index extends Component {
     render() {
-        if(isLoggedIn()==false||compareRole("ROLE_ADMIN")==false){
+        if(isLoggedIn()===false||compareRole("ROLE_ADMIN")===false){
             alert("You don't have right permission");
             return (
                 <Redirect to='/' />

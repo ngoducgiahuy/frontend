@@ -1,8 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { getJWT } from './Authentication';
 const endpoint = "http://localhost:8080/api";
-// const endpoint = "https://jsonplaceholder.typicode.com/";
 
 
 export function get(url) {

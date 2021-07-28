@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
 import { post } from '../../utils/httpHelper';
 import './Auth.css'
 
@@ -16,26 +16,28 @@ const Login = (props) => {
 
     function handleLogin(e) {
         e.preventDefault();
-        
+
         const body = JSON.stringify({
-            username: e.target.username.value,
+            username: e.target.username.value.trim(),
             password: e.target.password.value,
         });
         post("/auth/signin", body).then((response) => {
-            if(response.status===200){
-                // console.log(response)
-                Cookies.set('token',response.data.accessToken,{expires: 1});
-                Cookies.set('username',response.data.username,{expires: 1});
-                Cookies.set('email',response.data.email,{expires: 1});
-                Cookies.set('id',response.data.id,{expires: 1});
+            if (response.status === 200) {
+                Cookies.set('token', response.data.accessToken, { expires: 1 });
+                Cookies.set('username', response.data.username, { expires: 1 });
+                Cookies.set('email', response.data.email, { expires: 1 });
+                Cookies.set('id', response.data.id, { expires: 1 });
                 const roles = JSON.stringify(response.data.roles);
-                Cookies.set('roles',roles,{expires: 1});
+                Cookies.set('roles', roles, { expires: 1 });
                 alert("Login success");
                 window.location.reload();
             }
         }).catch((error) => {
-            console.log(error);
-            alert("Username or password is incorrect!");
+            if (error.response.status === 404) {
+                alert("The username or password is incorrect!");
+            } else {
+                alert(error.response.data.message);
+            }
             e.target.username.value = "";
             e.target.password.value = "";
         })
@@ -47,7 +49,7 @@ const Login = (props) => {
             <Modal isOpen={modal} toggle={toggle} className={className}>
                 <ModalHeader toggle={toggle}>Login form</ModalHeader>
                 <ModalBody>
-                    <Form onSubmit={(e) => handleLogin(e)}>
+                    <Form onSubmit={(e) => handleLogin(e)} method="post">
                         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                             <Label for="username" className="mr-sm-2">Username</Label>
                             <Input className="mt-2" type="text" name="username" id="username" placeholder="username" />

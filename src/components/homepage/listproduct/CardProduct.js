@@ -1,24 +1,24 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import {
-    Card, CardImg, CardText, CardBody,
+    Card, CardImg, CardBody,
     CardTitle, CardSubtitle, Button
 } from 'reactstrap';
+import Rating from '@material-ui/lab/Rating';
 import './listproduct.css'
+import { addCart } from '../cart/CartFunction';
 
 
 
 
 export default class CardProduct extends Component {
-    componentDidMount() {
-        console.log("did mount");
-    }
+    
     render() {
         return (
             <div>
                 <Card className="product-div">
                     <Link className="product-link" to={`/product/${this.props.productData.id}`}>
-                    <CardImg className="product-img" top src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80" alt="Card image cap" />
+                        <CardImg className="product-img" top src={`data:image/jpeg;base64,${this.props.productData.image}`} alt="Card image cap" />
                     </Link>
                     <CardBody>
                         <div className="product-data">
@@ -28,9 +28,11 @@ export default class CardProduct extends Component {
                                 </Link>
                             </CardTitle>
                             <CardSubtitle tag="h6" className="mb-2 text-muted">{this.props.productData.price}</CardSubtitle>
+                            <Rating name="half-rating-read" defaultValue={this.props.productData.ratingPoint} precision={0.1} readOnly />
                         </div>
-                        <Button>Button</Button>
                     </CardBody>
+                    <Button color="primary" className="btn-add-cart" onClick={() => addCart(this.props.productData.id, this.props.productData.name,
+                        this.props.productData.price, 1)}>Add to cart</Button>
                 </Card>
             </div>
         )

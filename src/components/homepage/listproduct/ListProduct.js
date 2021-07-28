@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Col, Container, Row } from 'reactstrap'
 import CardProduct from './CardProduct';
 import Pagination from '../pagination/Pagination';
 import { get } from '../../utils/httpHelper';
@@ -25,7 +24,6 @@ export default class ListProduct extends Component {
                 const listProduct = response.data;
                 this.setState({ listProduct });
                 this.setState({ loading: false });
-                // console.log(listProduct);
             })
             .catch((error) => console.log(error));
     }
@@ -33,7 +31,6 @@ export default class ListProduct extends Component {
     componentDidUpdate(prevProps) {
         if(prevProps.uriCall !== this.props.uriCall){
             this.getProductList();
-            // console.log("DO update");
         }
     }
 

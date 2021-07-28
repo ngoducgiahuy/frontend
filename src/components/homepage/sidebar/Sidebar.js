@@ -8,9 +8,6 @@ export default class Sidebar extends Component {
                 <ListGroup>
                     <ListGroupItem>Category</ListGroupItem>
                     <ListGroupItem>Hot product</ListGroupItem>
-                    {/* <ListGroupItem></ListGroupItem>
-                    <ListGroupItem>Porta ac consectetur ac</ListGroupItem>
-                    <ListGroupItem>Vestibulum at eros</ListGroupItem> */}
                 </ListGroup>
             </div>
         )

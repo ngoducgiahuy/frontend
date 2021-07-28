@@ -1,5 +1,5 @@
-import React, { Component, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
     Collapse,
     Navbar,
@@ -12,19 +12,22 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-    NavbarText
 } from 'reactstrap';
 import { get } from '../../../utils/httpHelper';
 import './navbar.css';
 import Login from '../../auth/Login'
 import Register from '../../auth/register//Register';
 import Cookies from 'js-cookie';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import Badge from '@material-ui/core/Badge';
+import { getCartTotalNumberItem } from '../../cart/CartFunction'
 
 export default class NavbarHeader extends Component {
     state = {
         isOpen: false,
         isCartOpen: false,
         isUserOpen: false,
+        cartNumberItem: getCartTotalNumberItem(),
         listCate: [],
     };
 
@@ -48,6 +51,9 @@ export default class NavbarHeader extends Component {
                 Cookies.remove('email');
                 Cookies.remove('id');
                 Cookies.remove('roles');
+                if (Cookies.get('orderDetails') !== undefined) {
+                    Cookies.remove('orderDetails');
+                }
                 alert("Logout success");
                 window.location.reload();
             } else {
@@ -56,9 +62,6 @@ export default class NavbarHeader extends Component {
 
         }
         const listCate = this.state.listCate;
-        let buttonLoggin = null;
-        let buttonLogout = null;
-        let buttonRegister = null;
         return (
             <div>
                 <Navbar color="light" light expand="md">
@@ -82,12 +85,6 @@ export default class NavbarHeader extends Component {
                                     </DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
-                            <NavItem>
-                                <NavLink href="/components/">Components</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-                            </NavItem>
                         </Nav>
                     </Collapse>
                     <NavbarToggler onClick={this.toggleCart} />
@@ -100,9 +97,10 @@ export default class NavbarHeader extends Component {
                                 <DropdownMenu right>
                                     {!this.props.isLoggedIn && <DropdownItem> <Login buttonLabel="Login" /> </DropdownItem>}
                                     {!this.props.isLoggedIn && <DropdownItem> <Register buttonLabel="Register" /> </DropdownItem>}
-                                    {/* {this.props.isLoggedIn &&
-                                        <DropdownItem divider />
-                                    } */}
+                                    {this.props.isAdminOrStaff &&
+                                        <DropdownItem>
+                                            <a style={{textDecoration:"none", color:"black"}} href="/admin">Manage Page</a>
+                                        </DropdownItem>}
                                     {this.props.isLoggedIn &&
                                         <DropdownItem>
                                             <a onClick={LogoutFunction}>Logout</a>
@@ -111,7 +109,11 @@ export default class NavbarHeader extends Component {
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                             <NavItem>
-                                <NavLink href="/cart/">Cart</NavLink>
+                                <NavLink href="/cart/">
+                                    <Badge badgeContent={this.state.cartNumberItem} color="secondary">
+                                        <ShoppingCartIcon />
+                                    </Badge>
+                                </NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>

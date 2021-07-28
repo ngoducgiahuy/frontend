@@ -4,37 +4,40 @@ import { Button } from 'reactstrap';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { get, deleteAuth } from '../../utils/httpHelper'
 import Pagination from '../../homepage/pagination/Pagination';
-import EditCategory from './EditCategory';
+import EditProduct from './EditProduct';
 
 
 
-export default class CategoryTable extends Component {
+export default class ProductTale extends Component {
     state = {
-        listCategories: [],
+        listProduct: [],
         loading: false,
         currentPage: 1,
         postsPerPage: 9,
         responseError: "",
+        listCate: this.props.listCate,
     };
 
-    getCateList() {
-        const uriCall = "/categories/";
+    getProductList() {
+        const uriCall = "/products/";
         get(uriCall)
             .then(response => {
-                const listCategories = response.data;
-                this.setState({ listCategories });
+                const listProduct = response.data;
+                this.setState({ listProduct });
                 this.setState({ loading: false });
             })
             .catch((error) => console.log(error));
     }
 
+
+
     componentDidMount() {
-        this.getCateList();
+        this.getProductList();
     }
 
-    deleteCate = (cateId, cateName) => {
-        if (window.confirm('Delete category ' + cateName + '?')) {
-            var uriCall = "/categories/" + cateId;
+    deleteCate = (productId, productName) => {
+        if (window.confirm('Delete product ' + productName + '?')) {
+            var uriCall = "/products/" + productId;
             deleteAuth(uriCall).then((response) => {
                 if (response.status === 200) {
                     alert("Delete success!");
@@ -51,10 +54,11 @@ export default class CategoryTable extends Component {
 
     render() {
         const paginate = pageNumber => this.setState({ currentPage: pageNumber });
-        const listCate = this.state.listCategories;
+        const listProducts = this.state.listProduct;
         const indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
         const indexOfFirstPost = indexOfLastPost - this.state.postsPerPage;
-        const currentPosts = listCate.slice(indexOfFirstPost, indexOfLastPost);
+        const currentPosts = listProducts.slice(indexOfFirstPost, indexOfLastPost);
+        const listCategory = this.state.listCate;
 
         return (
             <div>
@@ -68,15 +72,15 @@ export default class CategoryTable extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {currentPosts.map(cate =>
-                            <tr key={cate.id}>
-                                <th scope="row">{cate.id}</th>
-                                <td>{cate.name}</td>
-                                <td>{cate.description}</td>
+                        {currentPosts.map(product =>
+                            <tr key={product.id}>
+                                <th scope="row">{product.id}</th>
+                                <td>{product.name}</td>
+                                <td>{product.description}</td>
                                 <td className="action-column">
-                                    <EditCategory categoryId={cate.id} categoryName={cate.name} categoryDes={cate.description}
+                                    <EditProduct productData={product} listCate={listCategory}
                                         buttonLabel="Update" />
-                                    <Button className="margin-left" color="danger" onClick={() => this.deleteCate(cate.id, cate.name)}>
+                                    <Button className="margin-left" color="danger" onClick={() => this.deleteCate(product.id, product.name)}>
                                         <DeleteIcon fontSize="small" /> Delete
                                     </Button>
                                 </td>
@@ -86,7 +90,7 @@ export default class CategoryTable extends Component {
                 </Table>
                 <div>
                     <Pagination postsPerPage={this.state.postsPerPage}
-                        totalPost={listCate.length}
+                        totalPost={listProducts.length}
                         paginate={paginate} />
                 </div>
             </div>

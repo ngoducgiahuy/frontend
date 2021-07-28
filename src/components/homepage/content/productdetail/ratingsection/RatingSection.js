@@ -18,8 +18,6 @@ export default class RatingSection extends Component {
             this.setState({ isLoggedIn: false }); 
         } else {
             this.setState({ isLoggedIn: true });
-            // const userId = Cookies.get('id');
-            // alert(userId);
         }
     }
     render() {

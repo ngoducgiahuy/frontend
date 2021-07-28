@@ -17,7 +17,6 @@ export default class RatingList extends Component {
         get(uriCall).then(response => {
             const listRating = response.data;
             this.setState({ listRating });
-            console.log(this.state.listRating);
         }).catch((error) => console.log(error));
     }
 

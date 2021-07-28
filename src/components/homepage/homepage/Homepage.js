@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { Col, Container, Row } from 'reactstrap'
-import SideBar from '../sidebar/Sidebar';
 import './homepage.css';
 import ListProduct from '../listproduct/ListProduct';
 

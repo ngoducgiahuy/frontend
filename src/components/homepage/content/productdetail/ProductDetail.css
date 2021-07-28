@@ -61,3 +61,11 @@
     padding: 10px 25px;
     margin-top: 15px;
   }
+
+  .rating-avg{
+    margin-left: 15px;
+  }
+
+  .star-rating {
+    color: #FFBA5A;
+  }
